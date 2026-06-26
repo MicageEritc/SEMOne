@@ -1,7 +1,8 @@
 ---
 title: "什么是扫描电子显微镜（SEM）"
-description: "第一次认识 SEM——为什么会发明 SEM、可以看到什么、与普通显微镜最大的区别是什么。"
+description: "带你从零入门，搞懂科研高频仪器 SEM 到底是什么以及它为何被各大实验室广泛使用。"
 date: "2026-01-01"
+order: 1
 readingTime: 8
 difficulty: "beginner"
 tags: ["SEM入门"]

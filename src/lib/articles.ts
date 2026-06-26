@@ -238,14 +238,15 @@ export const getArticleFull = cache(async (slug: string): Promise<ArticleFull | 
   if (!article?.rawContent) return null;
 
   const published = getPublishedSlugs();
+  // 上下篇仅限同分区（guide 文章不跳转到 knowledge）
+  const sameSection = published.filter((s) => s.startsWith(article.section + "/"));
 
   return {
     ...article,
     toc: extractToc(article.rawContent),
-    // readingTime 优先取 frontmatter 手写值，不填则自动估算
     readingTime: article.meta.readingTime ?? estimateReadingTime(article.rawContent),
-    prevArticle: getPrevArticle(slug, published),
-    nextArticle: getNextArticle(slug, published),
+    prevArticle: getPrevArticle(slug, sameSection),
+    nextArticle: getNextArticle(slug, sameSection),
     relatedArticles: getRelatedArticles(slug, published),
   };
 });

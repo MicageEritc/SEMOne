@@ -24,7 +24,6 @@ import ArticleBreadcrumb from "@/components/ArticleBreadcrumb";
 import ArticleMetaInfo from "@/components/ArticleMetaInfo";
 import ArticleToc from "@/components/ArticleToc";
 import ArticleNav from "@/components/ArticleNav";
-import RelatedArticles from "@/components/RelatedArticles";
 
 // ==================== SEO ====================
 
@@ -37,7 +36,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string[] }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const slugStr = slug.join("/");
+  const slugStr = slug.map((s) => { try { return decodeURIComponent(s); } catch { return s; } }).join("/");
   const article = await getArticleFull(slugStr);
 
   if (!article) {
@@ -95,7 +94,8 @@ export default async function ArticlePage({
   params: Promise<{ slug: string[] }>;
 }) {
   const { slug } = await params;
-  const slugStr = slug.join("/");
+  // decodeURIComponent: Next.js params 中的中文可能仍为编码状态
+  const slugStr = slug.map((s) => { try { return decodeURIComponent(s); } catch { return s; } }).join("/");
 
   // 加载完整文章数据
   const article = await getArticleFull(slugStr);
@@ -195,9 +195,6 @@ export default async function ArticlePage({
             prev={article.prevArticle}
             next={article.nextArticle}
           />
-
-          {/* 相关文章推荐 */}
-          <RelatedArticles articles={article.relatedArticles} />
         </article>
 
         {/* 右侧：TOC 目录（仅桌面端显示） */}
