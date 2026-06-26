@@ -8,7 +8,7 @@ export default function Footer() {
     <footer className="w-full border-t border-stone-200/40 bg-white/50">
       <div className="max-w-6xl mx-auto flex items-center justify-center py-6 px-5 sm:px-8">
         <p className="text-sm text-stone-400">
-          &copy; {new Date().getFullYear()} SEM One. 扫描电子显微镜知识平台。
+          &copy; {new Date().getFullYear()} SEM One. Designed & Maintained by 孟祥伟
         </p>
       </div>
     </footer>

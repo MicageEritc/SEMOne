@@ -2,6 +2,7 @@
 title: "SEM 与 TEM 有什么区别？"
 description: "SEM 看表面，TEM 看内部；SEM 更像宏观侦察，TEM 更像深入解剖。"
 date: "2026-01-04"
+order: 4
 readingTime: 12
 difficulty: "beginner"
 tags: ["SEM入门", "对比"]

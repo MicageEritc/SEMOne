@@ -271,11 +271,18 @@ function ensureCache() {
       // 跳过草稿
       if (meta.draft) continue;
 
+      // order 值：优先 frontmatter，其次从文件名提取（01xxx → 1），最后放末尾
+      const slugNum = parseInt(
+        slug.split("/").pop()?.match(/^(\d+)/)?.[1] || "0",
+        10
+      );
+      const order = meta.order ?? (slugNum > 0 ? slugNum : 99999);
+
       _articleCache.set(slug, { slug, meta, content: "", category, section } as Article);
       published.push({
         slug,
         date: meta.date || "1970-01-01",
-        order: meta.order ?? 999,
+        order,
       });
     } catch {
       // 解析失败，跳过
