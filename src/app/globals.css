@@ -51,8 +51,6 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* 固定滚动条空间，防止页面切换时内容偏移 */
   scrollbar-gutter: stable;
-  /* 锚点跳转偏移，避免被 sticky header 遮挡 */
-  scroll-padding-top: 6rem;
 }
 
 body {
