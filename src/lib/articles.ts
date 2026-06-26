@@ -123,8 +123,41 @@ function estimateReadingTime(text: string): number {
   return Math.max(1, Math.round((chinese + english * 2) / 300));
 }
 
-/** Markdown → HTML（含标题 ID） */
+/** 预处理脚注：[^n] → <sup> + [^n]: ... → 脚注区块 */
+function preprocessFootnotes(md: string): string {
+  const footnotes: { id: string; text: string }[] = [];
+  let result = md;
+
+  // 1. 收集 [^n]: text 定义
+  result = result.replace(/^\[(\^[^\]]+)\]:\s*(.+)$/gm, (_m, id: string, text: string) => {
+    footnotes.push({ id, text: text.trim() });
+    return ""; // 从正文中移除
+  });
+
+  // 2. 将 [^n] 替换为 HTML sup 标签
+  result = result.replace(/\[(\^[^\]]+)\]/g, (_m, id: string) => {
+    const idx = footnotes.findIndex((f) => f.id === id);
+    const n = idx >= 0 ? idx + 1 : id.replace("^", "");
+    return `<sup id="fnref:${n}"><a href="#fn:${n}">${n}</a></sup>`;
+  });
+
+  // 3. 在末尾追加脚注区块
+  if (footnotes.length > 0) {
+    const items = footnotes
+      .map((f, i) => {
+        const n = i + 1;
+        return `<li id="fn:${n}">${f.text} <a href="#fnref:${n}" aria-label="返回正文">↩</a></li>`;
+      })
+      .join("\n");
+    result += `\n<div class="footnotes"><ol>${items}</ol></div>`;
+  }
+
+  return result;
+}
+
+/** Markdown → HTML（含标题 ID + 脚注） */
 async function mdToHtml(md: string): Promise<string> {
+  const processed = preprocessFootnotes(md);
   const result = await unified()
     .use(remarkParse)
     .use(() => (tree: any) => {
@@ -138,7 +171,7 @@ async function mdToHtml(md: string): Promise<string> {
       });
     })
     .use(remarkHtml, { sanitize: false })
-    .process(md);
+    .process(processed);
   return result.toString();
 }
 
@@ -209,7 +242,8 @@ export const getArticleFull = cache(async (slug: string): Promise<ArticleFull | 
   return {
     ...article,
     toc: extractToc(article.rawContent),
-    readingTime: estimateReadingTime(article.rawContent),
+    // readingTime 优先取 frontmatter 手写值，不填则自动估算
+    readingTime: article.meta.readingTime ?? estimateReadingTime(article.rawContent),
     prevArticle: getPrevArticle(slug, published),
     nextArticle: getNextArticle(slug, published),
     relatedArticles: getRelatedArticles(slug, published),
@@ -282,8 +316,13 @@ export async function getRecentArticles(n: number = 6): Promise<Article[]> {
     .slice(0, n);
 }
 
-/** 获取所有文章 slug（generateStaticParams 用） */
+/** 获取所有文章 slug（generateStaticParams 用）
+ *
+ * 直接扫描 filesystem，不使用模块缓存。
+ * 这样 dev 模式下文件增删会自动生效，build 时也不依赖缓存顺序。
+ */
 export function getAllArticleSlugs(): string[] {
+  clearCache();
   return getPublishedSlugs();
 }
 

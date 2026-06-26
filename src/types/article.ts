@@ -53,6 +53,8 @@ export interface ArticleMeta {
   date: string;
   /** 最后更新 YYYY-MM-DD（可选） */
   updatedAt?: string;
+  /** 阅读时间（分钟），不填则自动估算 */
+  readingTime?: number;
   /** 难度 */
   difficulty?: ArticleDifficulty;
   /** 标签 */

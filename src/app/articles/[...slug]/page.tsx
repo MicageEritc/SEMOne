@@ -149,9 +149,9 @@ export default async function ArticlePage({
           {/* 文章正文（Markdown 渲染后的 HTML） */}
           <div
             className="
+              article-content
               prose
               prose-stone
-              prose-lg
               max-w-none
               /* 标题样式 */
               prose-headings:text-stone-900 prose-headings:font-semibold
@@ -168,7 +168,18 @@ export default async function ArticlePage({
               /* 图片样式 */
               prose-img:rounded-xl prose-img:border prose-img:border-stone-200
               /* 引用样式 */
-              prose-blockquote:border-l-blue-400 prose-blockquote:bg-blue-50/30 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-xl prose-blockquote:not-italic
+              prose-blockquote:border-l-blue-400
+              prose-blockquote:bg-blue-50/30 
+              prose-blockquote:py-3 prose-blockquote:px-4 
+              prose-blockquote:rounded-r-xl 
+              prose-blockquote:not-italic 
+              prose-blockquote:my-4
+              prose-blockquote:leading-relaxed
+              [&_p]:m-0
+              [&_p]:before:content-none
+              [&_p]:after:content-none
+              prose-blockquote:before:content-none
+              prose-blockquote:after:content-none
               /* 列表样式 */
               prose-li:text-stone-600
               /* 表格样式 */

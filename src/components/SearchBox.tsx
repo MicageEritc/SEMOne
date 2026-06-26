@@ -27,7 +27,7 @@ export default function SearchBox() {
         {/* 输入框 */}
         <input
           type="text"
-          placeholder="搜索 SEM 知识、教程、案例…"
+          placeholder="全方位扫描电镜知识库，连接入门到前沿科研。"
           disabled
           className="
             w-full h-12 pl-12 pr-4
