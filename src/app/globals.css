@@ -47,6 +47,8 @@ html {
   /* 字体抗锯齿 — Apple 风格必备 */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* 固定滚动条空间，防止页面切换时内容偏移 */
+  scrollbar-gutter: stable;
 }
 
 body {

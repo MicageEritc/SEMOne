@@ -15,6 +15,7 @@
  * - SEO Metadata
  */
 
+import { cache } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -162,8 +163,14 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   // 保证缓存中的 slug 列表是最新的（用于 navigate 等）
   ensureCache();
 
-  const filePath = path.join(ARTICLES_DIR, `${slug}.md`);
+  // slug 可能来自 URL params，中文可能仍处于编码状态，安全解码
+  const decodedSlug = (() => { try { return decodeURIComponent(slug); } catch { return slug; } })();
+  const filePath = path.join(ARTICLES_DIR, `${decodedSlug}.md`);
   try {
+    if (!fs.existsSync(filePath)) {
+      console.warn(`[getArticleBySlug] file not found: ${filePath}`);
+      return null;
+    }
     const raw = fs.readFileSync(filePath, "utf8");
     const { data, content: mdBody } = matter(raw);
     const html = await mdToHtml(mdBody);
@@ -188,8 +195,12 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
   }
 }
 
-/** 获取完整文章（含 TOC + 导航） */
-export async function getArticleFull(slug: string): Promise<ArticleFull | null> {
+/** 获取完整文章（含 TOC + 导航）
+ *
+ * 使用 React cache() 确保同一请求内 generateMetadata 和 ArticlePage
+ * 两次调用返回同一份数据，避免 Next.js 16 竞态导致的 404。
+ */
+export const getArticleFull = cache(async (slug: string): Promise<ArticleFull | null> => {
   const article = await getArticleBySlug(slug);
   if (!article?.rawContent) return null;
 
@@ -203,7 +214,7 @@ export async function getArticleFull(slug: string): Promise<ArticleFull | null> 
     nextArticle: getNextArticle(slug, published),
     relatedArticles: getRelatedArticles(slug, published),
   };
-}
+});
 
 // ==================== 全局文章列表 ====================
 
