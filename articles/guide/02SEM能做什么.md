@@ -1,6 +1,6 @@
 ---
 title: "SEM 能做什么？"
-description: "为什么实验室里遇到问题，大家第一反应都是先拍个 SEM？"
+description: "扫描电子显微镜不仅仅是一台能够拍摄微观图片的仪器，它还是现代科研中最重要的分析工具之一。"
 date: "2026-01-02"
 order: 2
 readingTime: 6

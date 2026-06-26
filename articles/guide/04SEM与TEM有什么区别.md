@@ -1,6 +1,6 @@
 ---
 title: "SEM 与 TEM 有什么区别？"
-description: "SEM 看表面，TEM 看内部；SEM 更像宏观侦察，TEM 更像深入解剖。"
+description: "它们都属于电子显微镜，却承担着完全不同的任务。理解 SEM 与 TEM 的区别，是学习电子显微镜的重要一步。"
 date: "2026-01-04"
 order: 4
 readingTime: 12

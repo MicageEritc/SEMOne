@@ -1,6 +1,6 @@
 ---
 title: "什么是扫描电子显微镜（SEM）"
-description: "带你从零入门，搞懂科研高频仪器 SEM 到底是什么以及它为何被各大实验室广泛使用。"
+description: "为什么会出现扫描电子显微镜？它究竟是什么？这是学习 SEM 的第一步。"
 date: "2026-01-01"
 order: 1
 readingTime: 8

@@ -1,6 +1,6 @@
 ---
 title: "SEM 与光学显微镜有什么区别？"
-description: "光学显微镜看整体色彩，SEM看透微观立体细节。"
+description: "为什么已经有了光学显微镜，人们还要发明扫描电子显微镜？真正的区别并不仅仅是放大倍率。"
 date: "2026-01-03"
 order: 3
 readingTime: 10
