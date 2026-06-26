@@ -51,6 +51,8 @@ html {
   -moz-osx-font-smoothing: grayscale;
   /* 固定滚动条空间，防止页面切换时内容偏移 */
   scrollbar-gutter: stable;
+  /* 锚点跳转偏移，避免被 sticky header 遮挡 */
+  scroll-padding-top: 6rem;
 }
 
 body {
@@ -74,6 +76,7 @@ body {
     margin-top: 2.5rem;
     margin-bottom: 1rem;
     color: var(--color-text-primary);
+    scroll-margin-top: 6rem;
   }
 
   & h2 {
@@ -85,6 +88,7 @@ body {
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--color-border-light);
     color: var(--color-text-primary);
+    scroll-margin-top: 6rem;
   }
 
   & h3 {
@@ -93,6 +97,7 @@ body {
     margin-top: 1.5rem;
     margin-bottom: 0.5rem;
     color: var(--color-text-primary);
+    scroll-margin-top: 6rem;
   }
 
   /* 段落 */
