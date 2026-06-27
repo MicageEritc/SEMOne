@@ -109,6 +109,6 @@ SEM 擅长观察微观结构，但它并不能回答所有科学问题。
 
 这正是下一篇文章将要讨论的话题。
 
->1：Suttison, Suchanat & Pengpat, Kamonpan & Intatha, Uraiwan & Fan, Jinchen & Zhang, Wei & Eitssayeam, Sukum. (2022). Preparation of LFP-based cathode materials for lithium-ion battery applications. Materials Today: Proceedings. 65. 10.1016/j.matpr.2022.05.302. 
-
 **下一篇：SEM 与光学显微镜有什么区别？为什么不用普通显微镜，而要使用扫描电子显微镜？**
+
+>1：Suttison, Suchanat & Pengpat, Kamonpan & Intatha, Uraiwan & Fan, Jinchen & Zhang, Wei & Eitssayeam, Sukum. (2022). Preparation of LFP-based cathode materials for lithium-ion battery applications. Materials Today: Proceedings. 65. 10.1016/j.matpr.2022.05.302. 
